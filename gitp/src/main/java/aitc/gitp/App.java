@@ -3,9 +3,7 @@ package aitc.gitp;//圖片讀取
 import java.util.logging.Logger;//導入方法依賴的package包/類
 
 /**
- * 
  * @author Azure
- *
  */
 
 public class App 
