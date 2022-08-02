@@ -19,7 +19,6 @@ public class App
 		ImageConvertor newp = new ImageConvertor(p);
 		newp.getconvertor();
 		LOG.info(newp.getimage()?"convert success.":"convert failed.");
-		//LOG.info(new ImageConvertor(p).convertor()?"convert success.":"convert failed.");
 		
 		
     }
