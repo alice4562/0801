@@ -56,6 +56,7 @@ class ImageConvertor{
 	public void setoutputStream(File newaoutputstream) {
 		aoutputstream = newaoutputstream;
 	}
+	
 	/**
 	 * {@summary}執行圖片格式轉換
 	 * @return 轉換後的圖片
@@ -77,7 +78,7 @@ class ImageConvertor{
 	 * @return 轉換成功=true，轉換失敗=false
 	 * @throws IOException
 	 */
-	public boolean getimage() throws IOException {
+	public boolean getimage() throws IOException  {
 		if(getconvertor()!=null) {
 			return true;
 		}
