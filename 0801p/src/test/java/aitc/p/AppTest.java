@@ -60,7 +60,7 @@ public class AppTest
           }
     }
     
-   /* @Test
+    @Test
     public void testParaGetSetCorrect() {
     	try {
             Para para = new Para(new String[]{"/tmp/test/in", "/tmp/test/out", "bmp"});
@@ -70,7 +70,7 @@ public class AppTest
         } catch (Exception e) {
             assertEquals("Should not be here", e.getMessage());
         }
-    }*/
+    }
     
     @Test
     public void testParaTwoParaGetSetCorrect() {
