@@ -20,7 +20,8 @@ public class Para extends Exception{
 		
 	}
 	public Para(String []args){
-		if(args.length!=2) {//輸入陣列長度不是2
+		if(args.length!=2||args==null) {//輸入陣列長度不是2
+			LOG.info("There should be at latest 2 parameters");
 			LOG.info("Usage: java -jar fontCreator*.jar [input file] [output file]");//輸出
 		}
 		else {//輸入陣列長度=2

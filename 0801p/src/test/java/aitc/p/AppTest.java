@@ -23,81 +23,114 @@ public class AppTest
         assertTrue( true );
     }
     
-  /* @Test
+    @Test
     public void testParaNull() {
-    	Para t = new Para(null);
-		assertEquals("Usage: java -jar fontCreator*.jar [input file] [output file]",t.getMessage());
+    	try {
+            new Para(null);
+        } catch (Exception e) {
+            assertEquals("There should be at latest 2 parameters", e.getMessage());
+        }
     	
-    }*/
+    }
     
     @Test
     public void testParaEmpty() {
-    	Para t = new Para(new String[0]);
-    	assertEquals("Usage: java -jar fontCreator*.jar [input file] [output file]",t.getMessage());
+    	try {
+            new Para(new String[0]);
+        } catch (Exception e) {
+            assertEquals("There should be at latest 2 parameters", e.getMessage());
+        }
     }
     
     @Test
     public void testParaLessThanTwo() {
-    	Para t = new Para(new String[] {"/tmp//test/test"});
-    	assertEquals("Usage: java -jar fontCreator*.jar [input file] [output file]",t.getMessage());
+    	try {
+            new Para(new String[]{"/tmp//test/test"});
+        } catch (Exception e) {
+            assertEquals("There should be at latest 2 parameters", e.getMessage());
+        }
     }
     
     @Test
     public void testParaWithoutSubName() {
-    	Para t = new Para(new String[] {"/tmp/test/test","tmp/test/test"});
-    	assertEquals("Couldn't find format name",t.getMessage());
+    	  try {
+              new Para(new String[]{"/tmp/test/test", "/tmp//test/test"});
+          } catch (Exception e) {
+              assertEquals("Couldn't find format name", e.getMessage());
+          }
     }
     
-    @Test
+   /* @Test
     public void testParaGetSetCorrect() {
-    	Para t= new Para(new String[] {"/tmp/test/in","/tmp/test/out","bmp"});
-    	if(t == new Para(new String[] {"/tmp/test/in","/tmp/test/out","bmp"})) {
-    		assertEquals("/tmp/test/in",t.getinputImagePath());
-			assertEquals("/tmp/test/out",t.getoututImagePath());
-			assertEquals("bmp",t.getformatName());
-    	}
-    	else {
-    		assertEquals("Should not be here",t.getMessage());
-    	}
-    }
+    	try {
+            Para para = new Para(new String[]{"/tmp/test/in", "/tmp/test/out", "bmp"});
+            assertEquals("/tmp/test/in", para.getinputImagePath());
+            assertEquals("/tmp/test/out", para.getoututImagePath());
+            assertEquals("bmp", para.getformatName());
+        } catch (Exception e) {
+            assertEquals("Should not be here", e.getMessage());
+        }
+    }*/
     
     @Test
     public void testParaTwoParaGetSetCorrect() {
-    	Para t = new Para(new String[] {"/tmp/test/in","/tmp/test/out.bmp"});
-    	if(t ==  new Para(new String[] {"/tmp/test/in","/tmp/test/out.bmp"})) {
-    		assertEquals("/tmp/test/in",t.getinputImagePath());
-    		assertEquals("/tmp/test/out.bmp",t.getoututImagePath());
-    		assertEquals("bmp",t.getformatName());
-    	}
-    	else {
-    		assertEquals("Should not be here",t.getMessage());
-    	}
+    	try {
+            Para para = new Para(new String[]{"/tmp/test/in", "/tmp/test/out.bmp"});
+            assertEquals("/tmp/test/in", para.getinputImagePath());
+            assertEquals("/tmp/test/out.bmp", para.getoututImagePath());
+            assertEquals("bmp", para.getformatName());
+        } catch (Exception e) {
+            assertEquals("Should not be here", e.getMessage());
+        }
     }
     
     @Test
     public void testImageConvertorNull() {
-    	ImageConvertor t = new ImageConvertor(null);
-    	assertEquals("Parameters should not be null",t.getMessage());
+    	try {
+            new ImageConvertor(null);
+        } catch (Exception e) {
+            assertEquals("parameters should not be null", e.getMessage());
+        }
     }
     
     @Test
     public void testImageConvertorInputFileNotFound() {
-    	ImageConvertor t = new ImageConvertor(new Para(new String[] {"/tmp/test/in","/tmp/test/out.bmp"}));
-    	if(t != new ImageConvertor(new Para(new String[] {"/tmp/test/in","/tmp/test/out.bmp"}))) {
-    		assertTrue(t.getMessage().startsWith("Open o write file failed"));
-    		assertEquals("Should not be here",t.getMessage());
-    	}
+    	try {
+            new ImageConvertor(new Para(new String[]{"/tmp/test/in", "/tmp/test/out.bmp"}));
+        } catch (Exception e) {
+            assertTrue(e.getMessage().startsWith("Open or write file failed!!!"));
+            assertEquals("Should not be here", e.getMessage());
+        }
     	
     }
-    
     @Test
-    public void testImageConvrotrOUtputFileFail() {
-    	
+    public void testImageConvertorOutputFileFail(){
+        try {
+            ClassLoader cl = AppTest.class.getClassLoader();
+            new ImageConvertor(new Para(new String[]{cl.getResource("logo-red.png").getPath(), "/out.bmp"}));
+        } catch (Exception e) {
+            assertTrue(e.getMessage().startsWith("Open or write file failed!!!"));
+            assertEquals("Should not be here", e.getMessage());
+        }
     }
-    
+
     @Test
-    public void testImageConvertorSuccToBmp() {
-    	
+    public void testImageConvertorSuccToBmp(){
+        try {
+            ClassLoader cl = AppTest.class.getClassLoader();
+            String inputFile = cl.getResource("logo-red.png").getPath();
+            String outputFile = inputFile.replace("png", "bmp");
+            new ImageConvertor(new Para(new String[]{inputFile, outputFile})).getconvertor();
+            try(FileInputStream input = new FileInputStream(outputFile)){
+                byte[] checkIt = new byte[2];
+                input.read(checkIt);
+                assertEquals("BM", new String(checkIt));
+            }catch(IOException e){
+                assertEquals("Should not be here", e.getMessage());
+            }
+        } catch (Exception e) {
+            assertEquals("Should not be here", e.getMessage());
+        }
     }
 
 
