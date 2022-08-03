@@ -9,7 +9,7 @@ import java.io.File;
  * @author Azure
  *{@summary}圖片格式轉換
  */
-class ImageConvertor{
+class ImageConvertor extends Exception{
 	private static Logger LOG = Logger.getLogger("ImageConvertor");
 	
 	private Para a;
