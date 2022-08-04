@@ -7,10 +7,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.junit.Test;
-
-import aitc.p.ImageConvertor;
-import aitc.p.Para;
-
 /**
  * Unit test for simple App.
  */
