@@ -27,7 +27,8 @@ public class AppTest
     public void testParaNull() {
     	try {
             new Para(null);
-        } catch (Exception e) {
+        } 
+    	catch (Exception e) {
             assertEquals("There should be at latest 2 parameters", e.getMessage());
         }
     	
@@ -37,7 +38,8 @@ public class AppTest
     public void testParaEmpty() {
     	try {
             new Para(new String[0]);
-        } catch (Exception e) {
+        }
+    	catch (Exception e) {
             assertEquals("There should be at latest 2 parameters", e.getMessage());
         }
     }
@@ -46,7 +48,8 @@ public class AppTest
     public void testParaLessThanTwo() {
     	try {
             new Para(new String[]{"/tmp//test/test"});
-        } catch (Exception e) {
+        } 
+    	catch (Exception e) {
             assertEquals("There should be at latest 2 parameters", e.getMessage());
         }
     }
@@ -55,21 +58,10 @@ public class AppTest
     public void testParaWithoutSubName() {
     	  try {
               new Para(new String[]{"/tmp/test/test", "/tmp//test/test"});
-          } catch (Exception e) {
+          } 
+    	  catch (Exception e) {
               assertEquals("Couldn't find format name", e.getMessage());
           }
-    }
-    
-    @Test
-    public void testParaGetSetCorrect() {
-    	try {
-            Para para = new Para(new String[]{"/tmp/test/in", "/tmp/test/out", "bmp"});
-            assertEquals("/tmp/test/in", para.getinputImagePath());
-            assertEquals("/tmp/test/out", para.getoututImagePath());
-            assertEquals("bmp", para.getformatName());
-        } catch (Exception e) {
-            assertEquals("Should not be here", e.getMessage());
-        }
     }
     
     @Test
@@ -79,7 +71,8 @@ public class AppTest
             assertEquals("/tmp/test/in", para.getinputImagePath());
             assertEquals("/tmp/test/out.bmp", para.getoututImagePath());
             assertEquals("bmp", para.getformatName());
-        } catch (Exception e) {
+        }
+    	catch (Exception e) {
             assertEquals("Should not be here", e.getMessage());
         }
     }
@@ -88,7 +81,8 @@ public class AppTest
     public void testImageConvertorNull() {
     	try {
             new ImageConvertor(null);
-        } catch (Exception e) {
+        }
+    	catch (Exception e) {
             assertEquals("parameters should not be null", e.getMessage());
         }
     }
@@ -97,7 +91,8 @@ public class AppTest
     public void testImageConvertorInputFileNotFound() {
     	try {
             new ImageConvertor(new Para(new String[]{"/tmp/test/in", "/tmp/test/out.bmp"}));
-        } catch (Exception e) {
+        }
+    	catch (Exception e) {
             assertTrue(e.getMessage().startsWith("Open or write file failed!!!"));
             assertEquals("Should not be here", e.getMessage());
         }
@@ -108,7 +103,8 @@ public class AppTest
         try {
             ClassLoader cl = AppTest.class.getClassLoader();
             new ImageConvertor(new Para(new String[]{cl.getResource("logo-red.png").getPath(), "/out.bmp"}));
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             assertTrue(e.getMessage().startsWith("Open or write file failed!!!"));
             assertEquals("Should not be here", e.getMessage());
         }
@@ -125,7 +121,8 @@ public class AppTest
                 byte[] checkIt = new byte[2];
                 input.read(checkIt);
                 assertEquals("BM", new String(checkIt));
-            }catch(IOException e){
+            }
+            catch(IOException e){
                 assertEquals("Should not be here", e.getMessage());
             }
         } catch (Exception e) {
